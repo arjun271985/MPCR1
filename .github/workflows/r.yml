@@ -2,12 +2,12 @@ name: Update MPCR1 Downloads
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Runs every 10 minutes
+    - cron: '*/30 * * * *'  # Runs every 30 minutes
   workflow_dispatch:  # Allows manual runs if needed
 
 jobs:
   update-downloads:
-    runs-on: parrot  # Use a valid runner (e.g., ubuntu-latest)
+    runs-on: ubunutu-latest  # Use a valid runner (e.g., ubuntu-latest)
     
     steps:
       - name: Checkout repository
