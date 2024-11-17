@@ -3,38 +3,36 @@ name: Update MPCR1 Downloads
 on:
   schedule:
     - cron: '*/10 * * * *'  # Runs every 10 minutes
-     workflow_dispatch:  # Allows manual runs if needed
+  workflow_dispatch:  # Allows manual runs if needed
 
 jobs:
   update-downloads:
-    runs-on: parrot
+    runs-on: ubuntu-latest  # Use a valid runner (e.g., ubuntu-latest)
     
-steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3  # updated checkout@v3 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Updated checkout action
 
-    - name: Set up R
-      uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
 
-    - name: Install packages
-      run: |
-        Rscript -e 'install.packages("cranlogs")'
+      - name: Install packages
+        run: |
+          Rscript -e 'install.packages("cranlogs")'
 
-   - name: Fetch download count
-     run: |
-       Rscript -e 'install.packages("cranlogs")'
-       Rscript -e 'downloads <- cranlogs::cran_downloads("MPCR1", from = Sys.Date() - 30, to = Sys.Date()); count <- sum(downloads$count); write(count, "downloads.txt")'
+      - name: Fetch download count
+        run: |
+          Rscript -e 'downloads <- cranlogs::cran_downloads("MPCR1", from = Sys.Date() - 30, to = Sys.Date()); count <- sum(downloads$count); write(count, "downloads.txt")'
 
-    - name: Update README with download count
-      run: |
-        count=$(cat downloads.txt)
-        sed -i "/^<!--downloads-->/,/^<!--downloads-end-->/c\<!--downloads-->\n**Total downloads this month**: $count\n<!--downloads-end-->" README.md
+      - name: Update README with download count
+        run: |
+          count=$(cat downloads.txt)
+          sed -i "/^<!--downloads-->/,/^<!--downloads-end-->/c\<!--downloads-->\n**Total downloads this month**: $count\n<!--downloads-end-->" README.md
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "GitHub Action"
-        git config --global user.email "action@github.com"
-        git add README.md
-        git commit -m "Update MPCR1 download count"
-        git push
-        ```
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add README.md
+          git commit -m "Update MPCR1 download count"
+          git push
