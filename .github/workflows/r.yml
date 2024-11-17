@@ -3,13 +3,13 @@ name: Update MPCR1 Downloads
 on:
   schedule:
     - cron: '*/10 * * * *'  # Runs every 10 minutes
-  workflow_dispatch:  # Allows manual runs if needed
+     workflow_dispatch:  # Allows manual runs if needed
 
 jobs:
   update-downloads:
-    runs-on: ubuntu-latest
+    runs-on: parrot
     
-    steps:
+steps:
     - name: Checkout repository
       uses: actions/checkout@v3  # updated checkout@v3 
 
