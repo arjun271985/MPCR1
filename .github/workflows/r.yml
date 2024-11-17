@@ -2,7 +2,7 @@ name: Update MPCR Downloads
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Runs weekly on Sunday at midnight
+    - cron: '*/10 * * * *'  # Runs every 10 minutes
   workflow_dispatch:  # Allows manual runs if needed
 
 jobs:
