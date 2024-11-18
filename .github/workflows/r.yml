@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-downloads:
-    runs-on: ubunutu-latest  # Use a valid runner (e.g., ubuntu-latest)
+    runs-on: ubuntu-latest  # Use a valid runner (e.g., ubuntu-latest)
     
     steps:
       - name: Checkout repository
