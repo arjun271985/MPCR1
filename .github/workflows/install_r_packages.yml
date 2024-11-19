@@ -1,0 +1,28 @@
+name: Install R Packages
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install-packages:
+    runs-on: ubuntu-latest  # Use ubuntu-latest or your custom self-hosted runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install R and dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y r-base
+          sudo apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: Install R packages
+        run: |
+          Rscript -e 'install.packages("cranlogs")'
+          Rscript -e 'install.packages("devtools")'
+
+      - name: Run R code to verify installation
+        run: |
+          Rscript -e 'library(cranlogs); print("cranlogs package is successfully loaded!")'
