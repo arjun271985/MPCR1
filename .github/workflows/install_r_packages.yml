@@ -18,11 +18,6 @@ jobs:
           sudo apt install -y r-base
           sudo apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 
-      - name: Install R packages
-        run: |
-          Rscript -e 'install.packages("cranlogs")'
-          Rscript -e 'install.packages("devtools")'
-
       - name: Run R code to verify installation
         run: |
-          Rscript -e 'library(cranlogs); print("cranlogs package is successfully loaded!")'
+         Rscript -e 'library(cranlogs); print("cranlogs package is successfully loaded!")'
