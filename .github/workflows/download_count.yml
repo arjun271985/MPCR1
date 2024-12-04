@@ -20,12 +20,17 @@ jobs:
         with:
           r-version: '4.1.2'
 
-      # Step 3: Run R Script
+      # Step 3: Install Required R Packages
+      - name: Install R packages
+        run: |
+          Rscript -e 'install.packages("cranlogs", repos="https://cloud.r-project.org")'
+
+      # Step 4: Run R Script
       - name: Run R script to fetch download count
         run: |
           Rscript get_downloads.R
 
-      # Step 4: Commit and Push Updated File
+      # Step 5: Commit and Push Updated File
       - name: Commit and push the updated count
         uses: EndBug/add-and-commit@v7
         with:
