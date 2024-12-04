@@ -13,8 +13,8 @@ jobs:
       # Step 1: Install System Dependencies
       - name: Install system dependencies
         run: |
-          apt update
-          apt install -y libcurl4-openssl-dev libssl-dev
+          sudo apt update
+          sudo apt install -y libcurl4-openssl-dev libssl-dev
 
       # Step 2: Checkout Repository
       - name: Checkout repository
