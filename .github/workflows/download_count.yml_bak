@@ -2,7 +2,7 @@ name: Update Download Count
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  # Run every 3 hours
+    - cron: '0 0/3 * * 0'  # Run every 3 hours
   workflow_dispatch:  # Manual trigger
 
 jobs:
@@ -10,22 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout Repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set Up R
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.1.2'
 
-      # Step 3: Run R Script
+      - name: load library
+        run: |
+          library(cranlogs)
+
       - name: Run R script to fetch download count
         run: |
           Rscript get_downloads.R
 
-      # Step 4: Commit and Push Updated File
       - name: Commit and push the updated count
         uses: EndBug/add-and-commit@v7
         with:
